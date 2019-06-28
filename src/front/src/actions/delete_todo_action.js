@@ -11,7 +11,8 @@ export const deleteToDo = (todoId) => {
   return (dispatch, getState) => {
     
     let state = getState();
-    dispatch(toDoDeleted(state.todos.filter(i => i.id !== todoId)));
+    let toDoList =  state.todos.list.filter(i => i.id !== todoId);
+    dispatch(toDoDeleted(toDoList));
 
   };
 };

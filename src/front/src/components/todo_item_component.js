@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import moment from "moment";
 
 class ToDoItemComponent extends Component {
     
@@ -6,25 +7,23 @@ class ToDoItemComponent extends Component {
         super(props);
 
         this.state = {
-            edit: false
+            edit: false,
+            description: this.props.description,
+            priority: this.props.priority
         };
 
         this.completeTodoHandler = this.completeTodoHandler.bind(this);
-        this.editToDoHandler = this.editToDoHandler.bind(this);
         this.descriptionHandler = this.descriptionHandler.bind(this);
         this.priorityHandler = this.priorityHandler.bind(this);
+        this.editToDoHandler = this.editToDoHandler.bind(this);
+        this.deleteToDoHandler = this.deleteToDoHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onCancelHandler = this.onCancelHandler.bind(this);
     }
 
-    completeTodoHandler(evt) {
-        evt.preventDefault();
-        let id = parseInt(evt.currentTarget.getAttribute("data-id"), 10);
+    completeTodoHandler() {
+        let id = this.props.todoId;
         this.props.completeTodoHandler(id);
-    }
-
-    editToDoHandler() {
-        this.setState({edit: true});
     }
 
     descriptionHandler(evt) {
@@ -37,15 +36,29 @@ class ToDoItemComponent extends Component {
         this.setState({priority: value});
     }
     
+    editToDoHandler() {
+        this.setState({ edit: true });
+    }
+
+    deleteToDoHandler() {
+        let id = this.props.todoId;
+        this.props.actions.deleteToDo(id);
+    }
+
     onSubmitHandler() {
-        const {description, complete, priority} = this.state;
-        let createAt = new Date(); 
-        this.props.action.createToDo(description, createAt, complete, priority);
-        this.destroyState();
+        const { description, complete, priority } = this.state;
+        let todoId = this.props.todoId; 
+        let createAt = this.props.createAt;
+        this.props.actions.updateToDos(todoId, description, createAt, complete, priority);
+        this.setState({ edit: false });
     }
 
     onCancelHandler() {
-        this.setState({edit: false});
+        this.setState({
+            edit: false, 
+            description: this.props.description, 
+            priority: this.props.priority
+        });
     }
 
     renderStatic() {
@@ -55,20 +68,23 @@ class ToDoItemComponent extends Component {
                     <td><div>{this.props.index}</div></td>
                     <td><div>{this.props.priority}</div></td>
                     <td><div>{this.props.description}</div></td>
-                    <td><div>{this.props.createAt}</div></td>
+                    <td><div>{moment(this.props.createAt).format('MMMM Do YYYY, h:mm:ss a')}</div></td>
                     <td><div onClick={this.completeTodoHandler}>
                             <input type="checkbox" className="form-check-input" value={this.props.complete} />
                         </div>
                     </td>
                     <td>
+                        <button onClick={this.editToDoHandler} className="btn btn-primary mb-2">Edit</button>
                     </td>
                     <td>
+                        <button onClick={this.deleteToDoHandler} className="btn btn-danger mb-2">Delete</button>
                     </td>
                 </tr>
         );
     }
 
-    renderEdit() {
+    renderEdit() {;
+
         return (
             <tr data-id={this.props.todoId}>
                 <td>
@@ -81,11 +97,11 @@ class ToDoItemComponent extends Component {
                 </td>
                 <td>
                     <div>
-                        <input type="text" classNames="form-control" placeholder="Discription" onChange={this.descriptionHandler} value={this.state.description} />
+                        <input type="text" className="form-control" placeholder="Discription" onChange={this.descriptionHandler} value={this.state.description} />
                     </div>
                 </td>
                 <td>
-                    <div>{this.props.createAt}</div>
+                    <div>{moment(this.props.createAt).format('MMMM Do YYYY, h:mm:ss a')}</div>
                 </td>
                 <td><div onClick={this.completeTodoHandler}>
                         <input type="checkbox" className="form-check-input" value={this.props.complete} />

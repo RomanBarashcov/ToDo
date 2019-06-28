@@ -10,7 +10,7 @@ class ToDoListComponent extends Component {
     }
 
     completeTodoHandler(todoId) {
-        this.props.actions.completeTodo(todoId);
+        this.props.actions.completeToDo(todoId);
     }
 
     render() {
@@ -50,7 +50,8 @@ class ToDoListComponent extends Component {
                                         complete={item.complete}
                                         description={item.description}
                                         createdAt={item.createdAt}
-                                        completeTodoHandler={this.completeTodoHandler} />
+                                        completeTodoHandler={this.completeTodoHandler}
+                                        actions={this.props.actions} />
                                 );
                             }, this)
                         }
