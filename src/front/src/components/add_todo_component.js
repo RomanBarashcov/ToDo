@@ -34,8 +34,8 @@ class AddToDoComponent extends Component {
     
     onSubmitHandler() {
         const {description, priority, complete} = this.state;
-        let createAt = new Date(); 
-        this.props.actions.createToDo(description, createAt, complete, priority);
+        let createdAt = new Date(); 
+        this.props.actions.createToDo(description, createdAt, complete, priority);
         this.destroyState();
     }
 

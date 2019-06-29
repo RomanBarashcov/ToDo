@@ -68,7 +68,7 @@ class ToDoItemComponent extends Component {
                     <td><div>{this.props.index}</div></td>
                     <td><div>{this.props.priority}</div></td>
                     <td><div>{this.props.description}</div></td>
-                    <td><div>{moment(this.props.createAt).format('MMMM Do YYYY, h:mm:ss a')}</div></td>
+                    <td><div>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div></td>
                     <td><div onClick={this.completeTodoHandler}>
                             <input type="checkbox" className="form-check-input" value={this.props.complete} />
                         </div>
@@ -101,7 +101,7 @@ class ToDoItemComponent extends Component {
                     </div>
                 </td>
                 <td>
-                    <div>{moment(this.props.createAt).format('MMMM Do YYYY, h:mm:ss a')}</div>
+                    <div>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div>
                 </td>
                 <td><div onClick={this.completeTodoHandler}>
                         <input type="checkbox" className="form-check-input" value={this.props.complete} />
