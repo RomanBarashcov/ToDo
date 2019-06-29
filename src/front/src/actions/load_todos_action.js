@@ -1,4 +1,6 @@
-import * as types from "../constants/action_types";;
+import * as types from "../constants/action_types";
+import * as queries from "../constants/queries";
+import API_URL from "../constants/hosts";
 
 export const toDoLoaded = (todoList) => {
   return {
@@ -13,7 +15,7 @@ export const loadingToDos = () => {
     }
 };
 
-export const loadToDos = () => {
+export const loadToDos2 = () => {
   return (dispatch) => {
 
     dispatch(loadingToDos());
@@ -26,6 +28,46 @@ export const loadToDos = () => {
 
     dispatch(toDoLoaded(todoList));
 
+  };
+};
+
+export const loadToDos = () => {
+  return (dispatch) => {
+
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ query: queries.ListTodosQuery })
+    };
+
+    dispatch(loadingToDos());
+
+    return fetch(`${API_URL}`, fetchOptions)
+      .then(response => {
+          return response.json();
+      })
+      .then(json => {
+        dispatch(toDoLoaded(json));
+      })
+      .catch(e => {
+        if (e.name === "TypeError" && e.message === "Failed to fetch") {
+          console.error(e);
+          throw e;
+        }
+
+        if (!e.response) {
+          console.log("!error.response");
+          console.error(e.stack);
+        }
+
+        console.log("error");
+        console.log(e);
+
+        throw e;
+      });
   };
 };
 

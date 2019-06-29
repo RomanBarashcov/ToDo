@@ -1,5 +1,6 @@
 
 export default `
+  scalar Date
   type Query {
     ListTodos(orderBy: String, ascOrDesc: Boolean, filteredByCompleted: Boolean): [Task]
   }
