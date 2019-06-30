@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     id: {
       allowNull: false,
+      primaryKey: true,
       type: DataTypes.UUID,
       validate: {
         notNull: true

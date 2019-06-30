@@ -1,13 +1,4 @@
-export const ListTodosQuery = `
-  query {
-    ListTodos($orderBy, $ascOrDesc, $filteredByCompleted): {
-      tasks: {
-          id
-          description
-          createdAt
-          complete
-          priority
-      }
-    }
-  }
-`;
+
+export const ListTodosQuery = `query ListTodos($orderBy: String!, $ascOrDesc: Boolean!, $filteredByCompleted: Boolean!) {
+  ListTodos(orderBy: $orderBy, ascOrDesc: $ascOrDesc, filteredByCompleted: filteredByCompleted)
+}`;

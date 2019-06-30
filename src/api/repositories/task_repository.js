@@ -1,11 +1,12 @@
 "use strict";
 
 const db = require("../models/index");
+const uuid = require('uuid-random');
 
 const getTasks = async (orderBy, ascOrDesc, filteredByCompleted) => {
 
     let direction = ascOrDesc ? "ASC" : "DESC";
-
+    
     let tasks = await db.Task.findAll({ raw:true },
                 { where: { 
                         complete: filteredByCompleted 
@@ -20,13 +21,17 @@ const getTasks = async (orderBy, ascOrDesc, filteredByCompleted) => {
 
 const createTask = async (description, createdAt, complete, priority) => {
 
+    let id = uiid();
+
     let createdTask = await db.Task.create({
+        id: id,
         description: description, 
         completed: complete, 
         createdAt: createdAt,
         priority: priority
     });
-
+    
+    return id;
 };
 const updateTask = async (taskId, description, priority) => {
 

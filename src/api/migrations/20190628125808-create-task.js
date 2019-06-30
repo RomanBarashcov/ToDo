@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('Tasks', {
       id: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
+        defaultValue: Sequelize.UUIDV4
       },
       description: {
         allowNull: false,
