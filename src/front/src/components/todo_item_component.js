@@ -9,7 +9,8 @@ class ToDoItemComponent extends Component {
         this.state = {
             edit: false,
             description: this.props.description,
-            priority: this.props.priority
+            priority: this.props.priority,
+            completed: this.props.completed
         };
 
         this.completeStatusHandler = this.completeStatusHandler.bind(this);
@@ -21,10 +22,10 @@ class ToDoItemComponent extends Component {
         this.onCancelHandler = this.onCancelHandler.bind(this);
     }
 
-    completeStatusHandler() {
+    completeStatusHandler(evt) {
         let id = this.props.todoId;
-        let complete = this.props.complete;
-        this.props.completeStatusHandler(id, complete);
+        const { checked } = evt.target;
+        this.props.completeStatusHandler(id, checked);
     }
 
     descriptionHandler(evt) {
@@ -34,7 +35,7 @@ class ToDoItemComponent extends Component {
 
     priorityHandler(evt) {
         let { value } = evt.target;
-        this.setState({priority: value});
+        this.setState({priority: parseInt(value, 10)});
     }
     
     editToDoHandler() {
@@ -70,8 +71,8 @@ class ToDoItemComponent extends Component {
                     <td><div>{this.props.priority}</div></td>
                     <td><div>{this.props.description}</div></td>
                     <td><div>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div></td>
-                    <td><div onClick={this.completeStatusHandler}>
-                            <input type="checkbox" className="form-check-input" value={this.props.complete} />
+                    <td><div>
+                            <input type="checkbox" className="form-check-input" onChange={this.completeStatusHandler} checked={this.props.completed} />
                         </div>
                     </td>
                     <td>
@@ -104,8 +105,8 @@ class ToDoItemComponent extends Component {
                 <td>
                     <div>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div>
                 </td>
-                <td><div onClick={this.completeStatusHandler}>
-                        <input type="checkbox" className="form-check-input" value={this.props.complete} />
+                <td><div>
+                        <input type="checkbox" className="form-check-input" onChange={this.completeStatusHandler} checked={this.props.completed} />
                     </div>
                 </td>
                 <td>

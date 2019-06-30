@@ -27,7 +27,7 @@ export const updateToDos = (todoId, description, createdAt, complete, priority) 
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        mutation: queries.UpdateTaskMutationQuery,
+        query: queries.UpdateTaskMutationQuery,
         variables: { id: todoId, description: description, priority: priority },
       })
     };
@@ -37,6 +37,7 @@ export const updateToDos = (todoId, description, createdAt, complete, priority) 
           return response.json();
       })
       .then(json => {
+        debugger;
         dispatch(toDosUpdated(updatedToDos));
       })
       .catch(e => errorHandler(e));

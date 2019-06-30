@@ -47,7 +47,7 @@ class ToDoListComponent extends Component {
                                         key={index}
                                         todoId={item.id}
                                         priority={item.priority}
-                                        complete={item.complete}
+                                        completed={item.completed}
                                         description={item.description}
                                         createdAt={item.createdAt}
                                         completeStatusHandler={this.completeStatusHandler}

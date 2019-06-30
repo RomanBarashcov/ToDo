@@ -17,17 +17,17 @@ const resolvers =  {
         },
       updateTask: async (parent, { id, description, priority }) => { 
 
-          await taskRepository.updateTask(id, description, priority);
+          return await taskRepository.updateTask(id, description, priority);
 
         },
       markTaskAsComplete: async (parent,{id, complete}) => {
 
-        await taskRepository.markTaskAsComplete(id, complete);
+        return await taskRepository.changeCompleteStatus(id, complete);
 
       },
       deleteTask: async (parent, {id}) => {
 
-        await taskRepository.deleteTask(id);
+       return await taskRepository.deleteTask(id);
 
       },
     },

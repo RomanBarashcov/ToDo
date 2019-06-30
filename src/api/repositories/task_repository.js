@@ -3,18 +3,18 @@
 const db = require("../models/index");
 const uuid = require('uuid-random');
 
-const getTasks = async (orderBy = "priority", ascOrDesc = false, filteredByCompleted = false) => {
+const getTasks = async (orderBy = 'priority', ascOrDesc = false, filteredByCompleted = false) => {
 
-    let direction = ascOrDesc ? "ASC" : "DESC";
-    
+    let direction = ascOrDesc ? 'ASC' : 'DESC';
+
     let tasks = await db.Task.findAll({ raw:true },
                 { where: { 
-                        complete: filteredByCompleted 
+                        completed: filteredByCompleted 
                     },
                  order: [
                     [orderBy, direction]
                 ]});
-    
+
     return tasks;
 
 };
@@ -30,12 +30,12 @@ const createTask = async (description, createdAt, complete, priority) => {
         createdAt: createdAt,
         priority: priority
     });
-    console.log("IDDDD____", id);
+
     return id;
 };
 const updateTask = async (taskId, description, priority) => {
 
-    await db.Task.create({
+    await db.Task.update({
             description: description,
             priority: priority
         }, { where: { id: taskId }
@@ -44,7 +44,7 @@ const updateTask = async (taskId, description, priority) => {
     return true;
 };
 
-const MarkToDoComplete = async (taskId, complete) => {
+const changeCompleteStatus = async (taskId, complete) => {
 
     await db.Task.update({ completed: complete }, {where: { id: taskId }});
     return true;
@@ -53,7 +53,7 @@ const MarkToDoComplete = async (taskId, complete) => {
 
 const deleteTask = async (taskId) => {
 
-    await db.Task.update({ completed: true }, {where: { id: task.id }});
+    await db.Task.destroy({ where: { id: taskId }});
     return true;
 
 };
@@ -63,6 +63,6 @@ module.exports = {
     getTasks: getTasks,
     createTask: createTask,
     updateTask: updateTask,
-    MarkToDoComplete: MarkToDoComplete,
+    changeCompleteStatus: changeCompleteStatus,
     deleteTask: deleteTask 
 }

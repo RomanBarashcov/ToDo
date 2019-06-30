@@ -21,7 +21,7 @@ export const changeTodoCompleteStatus = (todoId, complete) => {
     oldTodos.forEach((i) => {
 
       if(i.id === todoId) {
-        i.complete = true;
+        i.completed = complete;
       }  
 
        newTodos.push(i);
@@ -34,7 +34,7 @@ export const changeTodoCompleteStatus = (todoId, complete) => {
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        mutation: queries.markTaskAsCompleteMutationQuery,
+        query: queries.markTaskAsCompleteMutationQuery,
         variables: {id: todoId, complete: complete},
       })
     };

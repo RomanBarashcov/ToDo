@@ -23,7 +23,7 @@ export const deleteToDo = (todoId) => {
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        mutation: queries.deleteTaskMutationQuery,
+        query: queries.deleteTaskMutationQuery,
         variables: {id: todoId},
       })
     };
