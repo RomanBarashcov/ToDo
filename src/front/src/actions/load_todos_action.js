@@ -1,6 +1,7 @@
 import * as types from "../constants/action_types";
 import * as queries from "../constants/queries";
 import GRAPH_QL_URL from "../constants/hosts";
+import errorHandler from "../handlers/fetch_error_handler";
 
 export const toDoLoaded = (todoList) => {
   return {
@@ -43,22 +44,7 @@ export const loadToDos = () => {
       .then(json => {
         dispatch(toDoLoaded(json.data.ListTodos));
       })
-      .catch(e => {
-        if (e.name === "TypeError" && e.message === "Failed to fetch") {
-          console.error(e);
-          throw e;
-        }
-
-        if (!e.response) {
-          console.log("!error.response");
-          console.error(e.stack);
-        }
-
-        console.log("error");
-        console.log(e);
-
-        throw e;
-      });
+      .catch(e => errorHandler(e));
   };
 };
 
