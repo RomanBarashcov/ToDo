@@ -41,7 +41,7 @@ export const loadToDos = () => {
           return response.json();
       })
       .then(json => {
-        dispatch(toDoLoaded(json));
+        dispatch(toDoLoaded(json.data.ListTodos));
       })
       .catch(e => {
         if (e.name === "TypeError" && e.message === "Failed to fetch") {
