@@ -3,19 +3,29 @@ import * as queries from "../constants/queries";
 import GRAPH_QL_URL from "../constants/hosts";
 import errorHandler from "../handlers/fetch_error_handler";
 
-export const toDoCreated = (todoList) => {
-  return {
-    type: types.TODO_CREATED,
-    todoList
-  };
+export const todoCompleteStatusChanged = (todoList) => {
+    return {
+        type: types.TODOS_UPDATED,
+        todoList
+    }
 };
 
-export const createToDo = (description, createAt, completed, priority = 1) => {
+export const changeTodoCompleteStatus = (todoId, complete) => {
+
   return (dispatch, getState) => {
 
     let state = getState();
-    let todoList = state.todos.list;
-    let newTodos = { description: description, createdAt: createAt, completed: completed, priority: priority };
+    let oldTodos = state.todos.list;
+    let newTodos = [];
+
+    oldTodos.forEach((i) => {
+
+      if(i.id === todoId) {
+        i.complete = true;
+      }  
+
+       newTodos.push(i);
+    })
 
     const fetchOptions = {
       method: "POST",
@@ -24,8 +34,8 @@ export const createToDo = (description, createAt, completed, priority = 1) => {
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        query: queries.CreateTaskMutationQuery,
-        variables: newTodos,
+        mutation: queries.markTaskAsCompleteMutationQuery,
+        variables: {id: todoId, complete: complete},
       })
     };
 
@@ -34,13 +44,10 @@ export const createToDo = (description, createAt, completed, priority = 1) => {
           return response.json();
       })
       .then(json => {
-        debugger;
-        newTodos.id = json.data.id;
-        newTodos = [newTodos].concat(todoList);
-        dispatch(toDoCreated(newTodos));
+        dispatch(todoCompleteStatusChanged(newTodos));
       })
       .catch(e => errorHandler(e));
   };
 };
 
-export default createToDo;
+export default changeTodoCompleteStatus;

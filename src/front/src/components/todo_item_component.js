@@ -12,7 +12,7 @@ class ToDoItemComponent extends Component {
             priority: this.props.priority
         };
 
-        this.completeTodoHandler = this.completeTodoHandler.bind(this);
+        this.completeStatusHandler = this.completeStatusHandler.bind(this);
         this.descriptionHandler = this.descriptionHandler.bind(this);
         this.priorityHandler = this.priorityHandler.bind(this);
         this.editToDoHandler = this.editToDoHandler.bind(this);
@@ -21,9 +21,10 @@ class ToDoItemComponent extends Component {
         this.onCancelHandler = this.onCancelHandler.bind(this);
     }
 
-    completeTodoHandler() {
+    completeStatusHandler() {
         let id = this.props.todoId;
-        this.props.completeTodoHandler(id);
+        let complete = this.props.complete;
+        this.props.completeStatusHandler(id, complete);
     }
 
     descriptionHandler(evt) {
@@ -69,7 +70,7 @@ class ToDoItemComponent extends Component {
                     <td><div>{this.props.priority}</div></td>
                     <td><div>{this.props.description}</div></td>
                     <td><div>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div></td>
-                    <td><div onClick={this.completeTodoHandler}>
+                    <td><div onClick={this.completeStatusHandler}>
                             <input type="checkbox" className="form-check-input" value={this.props.complete} />
                         </div>
                     </td>
@@ -103,7 +104,7 @@ class ToDoItemComponent extends Component {
                 <td>
                     <div>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div>
                 </td>
-                <td><div onClick={this.completeTodoHandler}>
+                <td><div onClick={this.completeStatusHandler}>
                         <input type="checkbox" className="form-check-input" value={this.props.complete} />
                     </div>
                 </td>

@@ -12,7 +12,7 @@ class AddToDoComponent extends Component {
 
         this.descriptionHandler = this.descriptionHandler.bind(this);
         this.priorityHandler = this.priorityHandler.bind(this);
-        this.completeTodoHandler = this.completeTodoHandler.bind(this);
+        this.completeStatusHandler = this.completeStatusHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.destroyState = this.destroyState.bind(this);
     }
@@ -27,7 +27,7 @@ class AddToDoComponent extends Component {
         this.setState({priority: value});
     }
 
-    completeTodoHandler(evt) {
+    completeStatusHandler(evt) {
         let { value } = evt.target;
         this.setState({complete: value});
     }
@@ -59,7 +59,7 @@ class AddToDoComponent extends Component {
                         <input type="number" min="1" max="100" className="form-control" placeholder="Priority" onChange={this.priorityHandler} value={this.state.priority}/>     
                     </div>
                     <div className="form-group mx-sm-3 mb-2">
-                        <input type="checkbox" className="form-check-input" onChange={this.completeTodoHandler} value={this.state.complete}/>       
+                        <input type="checkbox" className="form-check-input" onChange={this.completeStatusHandler} value={this.state.complete}/>       
                     </div>
                     <button className="btn btn-success mb-2" onClick={this.onSubmitHandler}>Add ToDo</button>
                 </div>

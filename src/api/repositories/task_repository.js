@@ -23,14 +23,14 @@ const createTask = async (description, createdAt, complete, priority) => {
 
     let id = uuid();
 
-    let createdTask = await db.Task.create({
+    await db.Task.create({
         id: id,
         description: description, 
         completed: complete, 
         createdAt: createdAt,
         priority: priority
     });
-    
+    console.log("IDDDD____", id);
     return id;
 };
 const updateTask = async (taskId, description, priority) => {
@@ -41,18 +41,21 @@ const updateTask = async (taskId, description, priority) => {
         }, { where: { id: taskId }
     });
 
+    return true;
 };
 
 const MarkToDoComplete = async (taskId, complete) => {
 
     await db.Task.update({ completed: complete }, {where: { id: taskId }});
+    return true;
 
 };
 
 const deleteTask = async (taskId) => {
 
     await db.Task.update({ completed: true }, {where: { id: task.id }});
-        
+    return true;
+
 };
 
 

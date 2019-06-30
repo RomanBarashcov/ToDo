@@ -14,10 +14,10 @@ const typeDefs = `
   }
 
   type Mutation {
-    createTask(description: String!, createdAt:Date!, complete: Boolean, priority: Int): Task!
-    updateTask(id: String!, description: String!, priority:Int!): Task!
-    markTaskAsComplete(id: String!, complete: Boolean!): Task!
-    deleteTask(id: String!): Int!
+    createTask(description: String!, createdAt: Date!, complete: Boolean, priority: Int): String
+    updateTask(id: String!, description: String!, priority: Int!): Boolean!
+    markTaskAsComplete(id: String!, complete: Boolean!): Boolean!
+    deleteTask(id: String!): Boolean!
   }
 `;
 

@@ -28,10 +28,6 @@ export default (state = initState, action) => {
         return Object.assign({}, state, {
             list: action.todoList
     });
-    case types.TODO_COMPLETED: 
-        return Object.assign({}, state, {
-            list: action.todoList
-        });
     default:
       return state;
   }
