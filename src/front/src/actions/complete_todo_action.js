@@ -1,5 +1,4 @@
-import * as types from "../constants/action_types";;
-import * as queries from "../constants/queries";
+import * as types from "../constants/action_types";
 
 export const toDoCompleted = (todoList) => {
     return {

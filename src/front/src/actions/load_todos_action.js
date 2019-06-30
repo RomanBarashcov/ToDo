@@ -36,7 +36,7 @@ export const loadToDos = () => {
 
     dispatch(loadingToDos());
 
-    return fetch(`${GRAPH_QL_URL}`, fetchOptions)
+    return fetch(`${GRAPH_QL_URL}/graphql`, fetchOptions)
       .then(response => {
           return response.json();
       })

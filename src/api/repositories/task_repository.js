@@ -3,7 +3,7 @@
 const db = require("../models/index");
 const uuid = require('uuid-random');
 
-const getTasks = async (orderBy, ascOrDesc, filteredByCompleted) => {
+const getTasks = async (orderBy = "priority", ascOrDesc = false, filteredByCompleted = false) => {
 
     let direction = ascOrDesc ? "ASC" : "DESC";
     
@@ -21,7 +21,7 @@ const getTasks = async (orderBy, ascOrDesc, filteredByCompleted) => {
 
 const createTask = async (description, createdAt, complete, priority) => {
 
-    let id = uiid();
+    let id = uuid();
 
     let createdTask = await db.Task.create({
         id: id,

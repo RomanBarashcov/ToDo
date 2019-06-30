@@ -4,7 +4,7 @@ const { GraphQLScalarType, Kind } = require('graphql');
 const resolvers =  {
     Query: {
         ListTodos: async (parent, {orderBy, ascOrDesc, filteredByCompleted}) => {
-            console.log("LIST_TODOS___________");
+          
             return await taskRepository.getTasks(orderBy, ascOrDesc, filteredByCompleted);
 
         }
