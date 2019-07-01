@@ -10,12 +10,12 @@ export const toDoCreated = (todoList) => {
   };
 };
 
-export const createToDo = (description, createdAt, complete, priority = 1) => {
+export const createToDo = (description, complete, priority = 1, filteredByComplet) => {
   return (dispatch, getState) => {
 
     let state = getState();
     let todoList = state.todos.list;
-    let newTodos = { description: description, createdAt: createdAt, complete: complete, priority: priority };
+    let newTodos = { description: description, complete: complete, priority: priority };
 
     const fetchOptions = {
       method: "POST",
@@ -34,9 +34,16 @@ export const createToDo = (description, createdAt, complete, priority = 1) => {
           return response.json();
       })
       .then(json => {
-        newTodos.id = json.data.createTask;
-        newTodos = [newTodos].concat(todoList);
-        dispatch(toDoCreated(newTodos));
+
+        if(filteredByComplet !== complete) {
+          dispatch(toDoCreated(todoList));
+        }
+        else {
+          newTodos.id = json.data.createTask;
+          newTodos = [newTodos].concat(todoList);
+          dispatch(toDoCreated(newTodos));
+        }
+
       })
       .catch(e => errorHandler(e));
   };

@@ -9,8 +9,8 @@ export const ListTodosQuery = `query ListTodos($orderBy: String!, $ascOrDesc: Bo
       }
 }`;
 
-export const CreateTaskMutationQuery = `mutation createTask($description: String!, $createdAt: Date!, $complete: Boolean, $priority: Int) {
-  createTask(description: $description, createdAt: $createdAt, complete: $complete, priority: $priority)
+export const CreateTaskMutationQuery = `mutation createTask($description: String!, $complete: Boolean, $priority: Int) {
+  createTask(description: $description, complete: $complete, priority: $priority)
 }`;
 
 export const UpdateTaskMutationQuery = `mutation updateTask($id: String!, $description: String!, $priority: Int!) {

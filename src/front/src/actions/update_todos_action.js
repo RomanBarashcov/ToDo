@@ -37,7 +37,6 @@ export const updateToDos = (todoId, description, createdAt, complete, priority) 
           return response.json();
       })
       .then(json => {
-        debugger;
         dispatch(toDosUpdated(updatedToDos));
       })
       .catch(e => errorHandler(e));

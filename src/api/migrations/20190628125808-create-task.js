@@ -1,4 +1,6 @@
 'use strict';
+const uuid = require('uuid-random');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Tasks', {

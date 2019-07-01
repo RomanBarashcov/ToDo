@@ -6,48 +6,34 @@ class ToDoListComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            orderBy: "",
-            ascOrDesc: false,
-            filteredByComplet: false
-        };
-
         this.completeStatusHandler = this.completeStatusHandler.bind(this);
         this.orderByHandler = this.orderByHandler.bind(this);
         this.filterHandler = this.filterHandler.bind(this);
     }
 
     completeStatusHandler(todoId, complete) {
-        this.props.actions.changeTodoCompleteStatus(todoId, complete);
+        this.props.actions.changeTodoCompleteStatus(todoId, complete, this.props.data.viewState.filteredByCompleted);
     }
 
     orderByHandler(evt) {
         const orderBy = evt.currentTarget.getAttribute("data");
-        debugger;
-
-        this.state.setState({
-            orderBy: orderBy,
-            ascOrDesc: !this.state.ascOrDesc
-        });
-
-        this.actions.loadToDos(this.state.orderBy, this.state.ascOrDesc, this.state.filteredByComplet);
+        this.props.actions.loadToDos(orderBy, !this.props.data.viewState.ascOrDesc, this.props.data.viewState.filteredByCompleted);
     }
 
     filterHandler() {
-        this.setState({filteredByComplet: !this.state.filteredByComplet});
-        this.props.actions.loadToDos(this.state.orderBy, this.state.ascOrDesc, this.state.filteredByComplet);
+        this.props.actions.loadToDos(this.props.data.viewState.orderBy, this.props.data.viewState.ascOrDesc, !this.props.data.viewState.filteredByCompleted);
     }
 
     renderFilterButton() {
 
         let content = null;
-        
-        if(!this.state.filteredByComplet) {
 
-            content = (<div>Filter by: <button>Isn't Complete</button></div>);
+        if(this.props.data.viewState.filteredByCompleted) {
+
+            content = (<div>Filter by: <button className="btn btn-primary" onClick={this.filterHandler}>Isn't Complete</button></div>);
         } else {
 
-            content = (<div>Filter by: <button>Completed</button></div>);
+            content = (<div>Filter by: <button className="btn btn-primary" onClick={this.filterHandler}>Completed</button></div>);
         }
 
         return content;
@@ -68,15 +54,15 @@ class ToDoListComponent extends Component {
             content = (
                     <div>
                         <br />
-                         {this.renderFilterButton}
+                         {this.renderFilterButton()}
                         <br />
                     <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col"><div>#</div></th>
-                                <th scope="col" data="priority" onClick={this.orderByHandler}><div>Priority</div></th>
-                                <th scope="col" data="description" onClick={this.orderByHandler}><div>Description</div></th>
-                                <th scope="col" data="createdAt" onClick={this.orderByHandler}><div>Created At</div></th>
+                                <th scope="col" data="priority" className="pointer" onClick={this.orderByHandler}><div>Priority</div></th>
+                                <th scope="col" data="description" className="pointer" onClick={this.orderByHandler}><div>Description</div></th>
+                                <th scope="col" data="createdAt" className="pointer" onClick={this.orderByHandler}><div>Created At</div></th>
                                 <th scope="col"><div>Complete</div></th>
                                 <th scope="col"><div></div></th>
                                 <th scope="col"><div></div></th>

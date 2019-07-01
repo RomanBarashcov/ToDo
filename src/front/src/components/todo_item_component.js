@@ -43,17 +43,34 @@ class ToDoItemComponent extends Component {
     }
 
     deleteToDoHandler() {
+        var answer = window.confirm("Are you shure?")
+        if(!answer) return;
+
         let id = this.props.todoId;
         this.props.actions.deleteToDo(id);
     }
 
     onSubmitHandler() {
         const { description, complete, priority } = this.state;
+        if(!this.isDataCorrect(description, priority)) return;
+
         let todoId = this.props.todoId; 
         let createAt = this.props.createAt;
         this.props.actions.updateToDos(todoId, description, createAt, complete, priority);
         this.setState({ edit: false });
     }
+
+    isDataCorrect(description, priority) {
+
+        if(description.length === 0 || priority.length === 0) {
+
+            alert("Description and priority should be not empty")
+
+            return false;
+        }
+
+        return true;
+    } 
 
     onCancelHandler() {
         this.setState({
@@ -94,7 +111,7 @@ class ToDoItemComponent extends Component {
                 </td>
                 <td>
                     <div> 
-                        <input type="number" min="1" max="100" className="form-control" placeholder="Priority" onChange={this.priorityHandler} value={this.state.priority}/>
+                        <input type="number" min="1" max="100" className="form-control" placeholder="Priority" onChange={this.priorityHandler} value={this.state.priority} />
                     </div>
                 </td>
                 <td>

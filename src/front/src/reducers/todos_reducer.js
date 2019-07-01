@@ -3,7 +3,12 @@ import * as types from "../constants/action_types";
 const initState = {
   loaded: false,
   loading: false,
-  list: []
+  list: [],
+  viewState: {
+    orderBy: "priority",
+    ascOrDesc: false,
+    filteredByComplet: false
+  }
 };
 
 export default (state = initState, action) => {
@@ -14,7 +19,8 @@ export default (state = initState, action) => {
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        list: action.todoList
+        list: action.todoList,
+        viewState: action.viewState
       });
     case types.TODO_CREATED:
         return Object.assign({}, state, {

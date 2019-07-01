@@ -14,7 +14,7 @@ export class ToDoContainer extends Component {
                 <br />
                     <h2>ToDo List</h2>
                 <br />
-                <AddToDoComponent actions={this.props.actions} />
+                <AddToDoComponent actions={this.props.actions} filteredByCompleted={this.props.data.viewState.filteredByCompleted}/>
                 <ToDoListComponent data={this.props.data} actions={this.props.actions} />
             </div>);
     }

@@ -10,7 +10,7 @@ export const todoCompleteStatusChanged = (todoList) => {
     }
 };
 
-export const changeTodoCompleteStatus = (todoId, complete) => {
+export const changeTodoCompleteStatus = (todoId, complete, filteredByComplet) => {
 
   return (dispatch, getState) => {
 
@@ -21,8 +21,9 @@ export const changeTodoCompleteStatus = (todoId, complete) => {
     oldTodos.forEach((i) => {
 
       if(i.id === todoId) {
-        i.completed = complete;
-      }  
+        if(filteredByComplet !== complete) return;
+          i.completed = complete;
+      }
 
        newTodos.push(i);
     })

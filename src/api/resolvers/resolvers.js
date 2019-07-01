@@ -10,9 +10,9 @@ const resolvers =  {
         }
     },
     Mutation: {
-      createTask: async (parent, { description, createdAt, complete, priority }) => {
+      createTask: async (parent, { description, complete, priority }) => {
 
-          return await taskRepository.createTask(description, createdAt, complete, priority);
+          return await taskRepository.createTask(description, complete, priority);
 
         },
       updateTask: async (parent, { id, description, priority }) => { 

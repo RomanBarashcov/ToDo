@@ -8,7 +8,7 @@ module.exports = {
           [{ id: uuid(), description: "Buy milk", createdAt: new Date(), completed: false, priority: 1}, 
            { id: uuid(), description: "Buy bread", createdAt: new Date(), completed: false, priority: 2}, 
            { id: uuid(), description: "Do exercise", createdAt: new Date(), completed: false, priority: 3}, 
-           { id: uuid(), description: "Go cycling", createdAt: new Date(), completed: false, priority: 4}, ], 
+           { id: uuid(), description: "Go cycling", createdAt: new Date(), completed: true, priority: 4}, ], 
         {});
   },
 

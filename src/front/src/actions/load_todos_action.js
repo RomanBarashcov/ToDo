@@ -3,10 +3,11 @@ import * as queries from "../constants/queries";
 import GRAPH_QL_URL from "../constants/hosts";
 import errorHandler from "../handlers/fetch_error_handler";
 
-export const toDoLoaded = (todoList) => {
+export const toDoLoaded = (todoList, viewState) => {
   return {
     type: types.TODOS_LOADED,
-    todoList
+    todoList: todoList, 
+    viewState: viewState
   };
 };
 
@@ -18,6 +19,12 @@ export const loadingToDos = () => {
 
 export const loadToDos = (orderBy = "priority", ascOrDesc = false, filteredByCompleted = false) => {
   return (dispatch) => {
+
+    const viewState = {
+      orderBy: orderBy,
+      ascOrDesc: ascOrDesc,
+      filteredByCompleted: filteredByCompleted
+    };
 
     const fetchOptions = {
       method: "POST",
@@ -38,7 +45,7 @@ export const loadToDos = (orderBy = "priority", ascOrDesc = false, filteredByCom
           return response.json();
       })
       .then(json => {
-        dispatch(toDoLoaded(json.data.ListTodos));
+        dispatch(toDoLoaded(json.data.ListTodos, viewState));
       })
       .catch(e => errorHandler(e));
   };
