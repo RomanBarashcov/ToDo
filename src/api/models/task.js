@@ -1,5 +1,4 @@
 'use strict';
-const uuid = require('uuid-random');
 
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
@@ -9,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       validate: {
         notNull: true
-      }, 
-      defaultValue: uuid()
+      }
     },
     description: DataTypes.STRING,
     createdAt: {

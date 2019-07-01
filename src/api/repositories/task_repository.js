@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../models/index");
+const uuid = require('uuid-random');
 
 const getTasks = async (orderBy = 'priority', ascOrDesc = false, filteredByCompleted = false) => {
 
@@ -18,13 +19,16 @@ const getTasks = async (orderBy = 'priority', ascOrDesc = false, filteredByCompl
 
 const createTask = async (description, complete, priority) => {
 
-    let task = await db.Task.create({
+    const id = uuid();
+
+    await db.Task.create({
+        id: id,
         description: description, 
         completed: complete,
         priority: priority
     });
 
-    return task.dataValues.id;
+    return id;
 };
 
 const updateTask = async (taskId, description, priority) => {

@@ -5,14 +5,14 @@ class AddToDoComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            description: "",
+            description: '',
             priority: 1,
             complete: false,
             error: {
                 showError: false,
-                message: ""
+                message: ''
             }
-        }
+        };
 
         this.descriptionHandler = this.descriptionHandler.bind(this);
         this.priorityHandler = this.priorityHandler.bind(this);
@@ -69,39 +69,34 @@ class AddToDoComponent extends Component {
             complete: false,
             error: {
                 showError: false,
-                message: ""
+                message: ''
             }
         });
     }
 
     renderError() {
 
-        let content = "";
+        return (<div className="alert alert-warning" role="alert">
+                        Warning! {this.state.error.message}
+                    </div>);
 
-        if(this.state.error.showError) {
-            content = (<div className="alert alert-warning" role="alert">
-                            Warning! {this.state.error.message}
-                        </div>);
-        }
-
-        return content;
     }
 
     render() {
 
-        let content = null;
+        let content = '';
 
         content = (<div>
-                       {this.renderError()}
+                       {this.state.error.showError && this.renderError()}
                     <div className="row">
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="Discription" onChange={this.descriptionHandler} value={this.state.description} />
+                            <input type="text" className="form-control" placeholder="Discription" value={this.state.description} onChange={this.descriptionHandler} />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="number" min="1" max="100" className="form-control" placeholder="Priority" onChange={this.priorityHandler} value={this.state.priority} />     
+                            <input type="number" min="1" max="100" className="form-control" placeholder="Priority" value={this.state.priority} onChange={this.priorityHandler} />     
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="checkbox" className="form-check-input" onChange={this.completeStatusHandler} checked={this.state.complete} />       
+                            <input type="checkbox" className="form-check-input" checked={this.state.complete} onChange={this.completeStatusHandler} />       
                         </div>
                         <button className="btn btn-success mb-2" onClick={this.onSubmitHandler}>Add ToDo</button>
                     </div>
