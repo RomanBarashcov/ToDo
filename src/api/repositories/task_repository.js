@@ -5,16 +5,15 @@ const uuid = require('uuid-random');
 
 const getTasks = async (orderBy = 'priority', ascOrDesc = false, filteredByCompleted = false) => {
 
-    let direction = ascOrDesc ? 'ASC' : 'DESC';
+    const direction = ascOrDesc ? 'ASC' : 'DESC';
 
-    let tasks = await db.Task.findAll({ raw:true },
-                { where: { 
-                        completed: filteredByCompleted 
-                    },
-                 order: [
+     const tasks = await db.Task.findAll(
+                 {  where: { completed: filteredByCompleted },
+                    order: [
                     [orderBy, direction]
-                ]});
+                ]}).map(i => i.dataValues);
 
+    debugger;
     return tasks;
 
 };

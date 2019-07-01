@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import LoadDataContainer from "./containers/load_data_container";
 import ToDoContainer from "./containers/todo_container";

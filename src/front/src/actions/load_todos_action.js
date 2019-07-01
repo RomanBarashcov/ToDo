@@ -16,12 +16,8 @@ export const loadingToDos = () => {
     }
 };
 
-export const loadToDos = () => {
+export const loadToDos = (orderBy = "priority", ascOrDesc = false, filteredByCompleted = false) => {
   return (dispatch) => {
-
-    let orderBy = "priority";
-    let ascOrDesc = false;
-    let filteredByCompleted = false;
 
     const fetchOptions = {
       method: "POST",
