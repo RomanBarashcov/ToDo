@@ -25,25 +25,25 @@ const typeDefs = `
   type Mutation {
 
     """
-     Mutatuin for create new Todo
+      Mutation for create new Todo
     """
 
     CreateTodo(description: String!, complete: Boolean, priority: Int): String
 
     """
-      Mutatuin for update Todo
+      Mutation for update Todo
     """
 
     UpdateTodo(id: String!, description: String!, priority: Int!): Boolean
 
     """
-      Mutatuin for set Todo complete status
+      Mutation for set Todo complete status
     """
 
     MarkTodoComplete(id: String!, complete: Boolean!): Boolean
 
     """
-      Mutatuin for delete Todo by id
+      Mutation for delete Todo by id
     """
 
     DeleteTodo(id: String!): Boolean
