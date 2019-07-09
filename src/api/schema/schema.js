@@ -1,7 +1,11 @@
 const typeDefs = `
   scalar Date
 
-  type Task {
+  """
+    Default schema of data
+  """
+
+  type Todo {
     id: String!
     description: String!
     createdAt: Date!
@@ -10,14 +14,39 @@ const typeDefs = `
   }
 
   type Query {
-    ListTodos(orderBy: String, ascOrDesc: Boolean, filteredByCompleted: Boolean): [Task]
+
+  """
+     Query for geting list of todos with order by column, direction sort and filtering by complete todos
+  """
+
+    ListTodos(orderBy: String, ascOrDesc: Boolean, filteredByCompleted: Boolean): [Todo]
   }
 
   type Mutation {
-    createTask(description: String!, complete: Boolean, priority: Int): String
-    updateTask(id: String!, description: String!, priority: Int!): Boolean
-    markTaskAsComplete(id: String!, complete: Boolean!): Boolean
-    deleteTask(id: String!): Boolean
+
+    """
+     Mutatuin for create new Todo
+    """
+
+    CreateTodo(description: String!, complete: Boolean, priority: Int): String
+
+    """
+      Mutatuin for update Todo
+    """
+
+    UpdateTodo(id: String!, description: String!, priority: Int!): Boolean
+
+    """
+      Mutatuin for set Todo complete status
+    """
+
+    MarkTodoComplete(id: String!, complete: Boolean!): Boolean
+
+    """
+      Mutatuin for delete Todo by id
+    """
+
+    DeleteTodo(id: String!): Boolean
   }
 `;
 

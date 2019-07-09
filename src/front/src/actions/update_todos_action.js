@@ -27,7 +27,7 @@ export const updateToDos = (todoId, description, createdAt, complete, priority) 
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        query: queries.UpdateTaskMutationQuery,
+        query: queries.UpdateTodoMutation,
         variables: { id: todoId, description: description, priority: priority },
       })
     };

@@ -1,9 +1,8 @@
 'use strict';
-const uuid = require('uuid-random');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Tasks', {
+    return queryInterface.createTable('Todos', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -30,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Tasks');
+    return queryInterface.dropTable('Todos');
   }
 };

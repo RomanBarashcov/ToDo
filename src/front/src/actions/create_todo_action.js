@@ -24,7 +24,7 @@ export const createToDo = (description, complete, priority = 1, filteredByComple
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        query: queries.CreateTaskMutationQuery,
+        query: queries.CreateTodoMutation,
         variables: newTodos,
       })
     };

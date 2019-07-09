@@ -35,7 +35,7 @@ export const changeTodoCompleteStatus = (todoId, complete, filteredByComplet) =>
         'Accept': 'application/json'
       },
       body: JSON.stringify({ 
-        query: queries.markTaskAsCompleteMutationQuery,
+        query: queries.MarkTodoCompleteMutation,
         variables: {id: todoId, complete: complete},
       })
     };

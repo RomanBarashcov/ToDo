@@ -1,35 +1,40 @@
-const taskRepository = require("../repositories/task_repository");
+const todoRepository = require("../repositories/todo_repository");
 const { GraphQLScalarType, Kind } = require('graphql');
 
 const resolvers =  {
     Query: {
         ListTodos: async (parent, {orderBy, ascOrDesc, filteredByCompleted}) => {
           
-            return await taskRepository.getTasks(orderBy, ascOrDesc, filteredByCompleted);
+            return await todoRepository.getTodos(orderBy, ascOrDesc, filteredByCompleted);
 
         }
     },
     Mutation: {
-      createTask: async (parent, { description, complete, priority }) => {
 
-          return await taskRepository.createTask(description, complete, priority);
+      CreateTodo: async (parent, { description, complete, priority }) => {
 
-        },
-      updateTask: async (parent, { id, description, priority }) => { 
-
-          return await taskRepository.updateTask(id, description, priority);
-
-        },
-      markTaskAsComplete: async (parent,{id, complete}) => {
-
-        return await taskRepository.changeCompleteStatus(id, complete);
+          return await todoRepository.createTodo(description, complete, priority);
 
       },
-      deleteTask: async (parent, {id}) => {
 
-       return await taskRepository.deleteTask(id);
+      UpdateTodo: async (parent, { id, description, priority }) => { 
+
+          return await todoRepository.updateTodo(id, description, priority);
 
       },
+
+      MarkTodoComplete: async (parent,{id, complete}) => {
+
+          return await todoRepository.changeCompleteStatus(id, complete);
+        
+      },
+
+      DeleteTodo: async (parent, {id}) => {
+
+          return await todoRepository.deleteTodo(id);
+
+      },
+
     },
     Date: new GraphQLScalarType({
       name: 'Date',

@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "root",
-    "database": "ToDo_db",
+    "database": "test_db",
     "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": false,

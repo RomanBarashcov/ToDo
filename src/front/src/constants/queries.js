@@ -9,18 +9,18 @@ export const ListTodosQuery = `query ListTodos($orderBy: String!, $ascOrDesc: Bo
       }
 }`;
 
-export const CreateTaskMutationQuery = `mutation createTask($description: String!, $complete: Boolean, $priority: Int) {
-  createTask(description: $description, complete: $complete, priority: $priority)
+export const CreateTodoMutation = `mutation CreateTodo($description: String!, $complete: Boolean, $priority: Int) {
+  CreateTodo(description: $description, complete: $complete, priority: $priority)
 }`;
 
-export const UpdateTaskMutationQuery = `mutation updateTask($id: String!, $description: String!, $priority: Int!) {
-  updateTask(id: $id, description: $description, priority: $priority)
+export const UpdateTodoMutation = `mutation UpdateTodo($id: String!, $description: String!, $priority: Int!) {
+  UpdateTodo(id: $id, description: $description, priority: $priority)
 }`;
 
-export const markTaskAsCompleteMutationQuery = `mutation  markTaskAsComplete($id: String!, $complete: Boolean!) {
-  markTaskAsComplete(id: $id, complete: $complete)
+export const MarkTodoCompleteMutation = `mutation MarkTodoComplete($id: String!, $complete: Boolean!) {
+  MarkTodoComplete(id: $id, complete: $complete)
 }`;
 
-export const deleteTaskMutationQuery = `mutation  deleteTask($id: String!) {
-  deleteTask(id: $id)
+export const DeleteTodoMutation = `mutation DeleteTodo($id: String!) {
+  DeleteTodo(id: $id)
 }`;
