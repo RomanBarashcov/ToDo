@@ -1,10 +1,10 @@
 {
-  "name": "application-name",
+  "name": "todo-app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodejs ./bin/www",
-    "debug": "nodemon --inspect ./bin/www"
+    "start": "nodemon ./bin/www.js",
+    "debug": "nodemon --inspect ./bin/www.js"
   },
   "dependencies": {
     "apollo-server-express": "^2.6.7",
@@ -17,8 +17,9 @@
     "morgan": "^1.9.1",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.9.0",
+    "sequelize": "^5.21.4",
     "static-favicon": "~1.0.0",
-    "uuid-random": "^1.0.9"
+    "uuid-random": "^1.0.9",
+    "nodemon": "^2.0.2"
   }
 }

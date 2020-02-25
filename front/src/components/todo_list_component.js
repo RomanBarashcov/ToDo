@@ -39,6 +39,36 @@ class ToDoListComponent extends Component {
         return content;
     }
 
+    renderListItems() {
+
+        let content = null;
+
+        if(this.props.data.list) {
+
+                content = (<tbody>
+                    {
+                        this.props.data.list.map((item, index) => {
+                            return (
+                                <ToDoItemComponent
+                                    key={index}
+                                    todoId={item.id}
+                                    priority={item.priority}
+                                    completed={item.completed}
+                                    description={item.description}
+                                    createdAt={item.createdAt}
+                                    completeStatusHandler={this.completeStatusHandler}
+                                    actions={this.props.actions} />
+                            );
+                        }, this)
+                    }
+                    </tbody>
+                );
+        }
+
+        return content;
+
+    }
+
     render() {
 
         let content = null;
@@ -54,7 +84,7 @@ class ToDoListComponent extends Component {
             content = (
                     <div>
                         <br />
-                         {this.renderFilterButton()}
+                            {this.renderFilterButton()}
                         <br />
                     <table className="table">
                         <thead>
@@ -69,21 +99,7 @@ class ToDoListComponent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {
-                            this.props.data.list.map((item, index) => {
-                                return (
-                                    <ToDoItemComponent
-                                        key={index}
-                                        todoId={item.id}
-                                        priority={item.priority}
-                                        completed={item.completed}
-                                        description={item.description}
-                                        createdAt={item.createdAt}
-                                        completeStatusHandler={this.completeStatusHandler}
-                                        actions={this.props.actions} />
-                                );
-                            }, this)
-                        }
+                            {this.renderListItems()}
                         </tbody>
                     </table>
                     </div>
