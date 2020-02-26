@@ -1,9 +1,44 @@
 version: '3'
 services:
-  test:
+  server:
     build:
-     context: .
-     dockerfile: api/Dockerfile
-    image: todo-api
+      context: ./devops/server
+      dockerfile: Dockerfile
+    image: todo-server
     ports:
-      - '3000:3000'
+      - '80:80'
+    links:
+      - api:api
+      - front:front
+  db:
+    container_name: todo-db
+    image: todo-db
+    build:
+      context: ./devops/db
+      dockerfile: Dockerfile
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "test_db"
+  api:
+    container_name: todo_api
+    image: todo_api
+    restart: always
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    links:
+      - db:db
+  front:
+    container_name: todo_front
+    image: todo_front
+    restart: always
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3000

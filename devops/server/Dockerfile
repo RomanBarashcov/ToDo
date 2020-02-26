@@ -1,5 +1,5 @@
 FROM nginx
 
-ADD devops/server/nginx.conf /etc/nginx/nginx.conf
+ADD nginx.conf .
 
 EXPOSE 80
