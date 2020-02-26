@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "root",
     "database": "test_db",
-    "host": "localhost",
+    "host": "db",
     "port": 5432,
     "dialect": "postgres",
     "operatorsAliases": false,

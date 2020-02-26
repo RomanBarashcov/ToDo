@@ -1,41 +1,44 @@
 version: '3'
 services:
-  server:
+  nginx:
+    container_name: nginx
+    image: nginx
     build:
       context: ./devops/server
       dockerfile: Dockerfile
-    image: todo-server
     ports:
-      - '80:80'
-    links:
-      - api:api
-      - front:front
+      - 80:80
+    depends_on:
+      - api
+      - front
   db:
-    container_name: todo-db
-    image: todo-db
+    container_name: db
+    image: db
     build:
       context: ./devops/db
       dockerfile: Dockerfile
     ports:
-      - '5432:5432'
+      - 5432:5432
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "root"
-      POSTGRES_DB: "test_db"
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_HOST=localhost
+      - POSTGRES_DB=test_db
   api:
-    container_name: todo_api
-    image: todo_api
-    restart: always
+    container_name: api
+    image: api
     build:
       context: ./api
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    depends_on:
+      - db
     links:
-      - db:db
+      - db
   front:
-    container_name: todo_front
-    image: todo_front
+    container_name: front
+    image: front
     restart: always
     build:
       context: ./front
