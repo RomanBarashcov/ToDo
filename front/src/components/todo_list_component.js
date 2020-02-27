@@ -98,9 +98,7 @@ class ToDoListComponent extends Component {
                                 <th scope="col"><div></div></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {this.renderListItems()}
-                        </tbody>
+                        {this.renderListItems()}
                     </table>
                     </div>
             );

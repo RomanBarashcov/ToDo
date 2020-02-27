@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www.js",
-    "debug": "nodemon --inspect ./bin/www.js",
+    "debug": "SLS_DEBUG=* NODE_ENV=development node --inspect-brk=0.0.0.0 ./node_modules/.bin/sls development --host 0.0.0.0 --port 3000",
     "hard-reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {
